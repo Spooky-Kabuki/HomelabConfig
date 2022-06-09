@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  traefik:
+    image: traefik:v2.7
+    container_name: "traefik"
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+      # (Optional) Expose Dashboard
+      - "8085:8080"  # Don't do this in production!
+    volumes:
+      - /etc/traefik/traefik.yml:/etc/traefik/traefik.yml
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /etc/traefik:/etc/traefik
